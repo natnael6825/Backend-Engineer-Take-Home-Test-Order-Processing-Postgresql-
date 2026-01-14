@@ -99,6 +99,12 @@ GET `/api/overdue?businessId=...`
 curl "http://localhost:3000/api/overdue?businessId=7d8f8c6b-5d2f-4e0a-9c1a-1d4f2c7a3b11"
 ```
 
+GET `/api/overdue-businesses`
+
+```bash
+curl "http://localhost:3000/api/overdue-businesses?page=1&pageSize=20"
+```
+
 ## Notes
 
 ### Atomicity
