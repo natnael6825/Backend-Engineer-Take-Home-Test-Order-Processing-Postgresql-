@@ -66,6 +66,8 @@ curl -X POST http://localhost:3000/api/products \
   }'
 ```
 
+Note: Create a business first (or run `npm run db:seed`). The product insert will fail if the `businessId` does not exist.
+
 PATCH `/api/products/:productId`
 
 ```bash
