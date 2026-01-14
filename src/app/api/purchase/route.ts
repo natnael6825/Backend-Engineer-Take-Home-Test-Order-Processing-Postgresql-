@@ -181,9 +181,9 @@ export async function POST(request: Request) {
       }
 
       await client.query(
-        `update products p set stock = p.stock - v.qty
+        `update products p set stock = p.stock - v.qty::int
          from (values ${updateClauses.join(", ")}) as v(product_id, qty)
-         where p.id = v.product_id and p.business_id = $${updateIdx}`,
+         where p.id = v.product_id::uuid and p.business_id = $${updateIdx}`,
         [...updateValues, businessId]
       );
 
