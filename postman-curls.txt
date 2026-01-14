@@ -1,0 +1,42 @@
+# Create business
+curl -X POST http://localhost:3000/api/businesses \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Acme Supply Co",
+    "creditLimitCents": 500000
+  }'
+
+# Create product
+curl -X POST http://localhost:3000/api/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "businessId": "7d8f8c6b-5d2f-4e0a-9c1a-1d4f2c7a3b11",
+    "sku": "SKU-NEW-01",
+    "name": "New Widget",
+    "stock": 25,
+    "priceCents": 1200
+  }'
+
+# Update product
+curl -X PATCH http://localhost:3000/api/products/3e5a9b2c-1d4f-4b7a-8c9d-1e2f3a4b5c6d \
+  -H "Content-Type: application/json" \
+  -d '{
+    "businessId": "7d8f8c6b-5d2f-4e0a-9c1a-1d4f2c7a3b11",
+    "stock": 90,
+    "priceCents": 1600
+  }'
+
+# Purchase
+curl -X POST http://localhost:3000/api/purchase \
+  -H "Content-Type: application/json" \
+  -d '{
+    "businessId": "7d8f8c6b-5d2f-4e0a-9c1a-1d4f2c7a3b11",
+    "idempotencyKey": "1b2c3d4e-5f60-4a7b-8c9d-0e1f2a3b4c5d",
+    "items": [
+      {"product_id": "3e5a9b2c-1d4f-4b7a-8c9d-1e2f3a4b5c6d", "qty": 2},
+      {"product_id": "6f7a8b9c-0d1e-4f2a-8b3c-4d5e6f7a8b9c", "qty": 1}
+    ]
+  }'
+
+# Overdue summary
+curl "http://localhost:3000/api/overdue?businessId=7d8f8c6b-5d2f-4e0a-9c1a-1d4f2c7a3b11"
